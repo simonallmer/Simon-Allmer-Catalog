@@ -1,5 +1,5 @@
 // ========================================
-// Graph Network Visualization - K6 Complete Graph
+// Graph Network Visualization - Complete Graph
 // ========================================
 
 class Node {
@@ -376,14 +376,6 @@ class GraphVisualization {
                 description: 'Description coming soon',
                 website: 'https://allmerjournals.com',
                 products: ['Magazines', 'Books']
-            },
-            {
-                id: 'snacks',
-                name: 'Allmer Snacks',
-                color: '#ec4899',
-                description: 'Description coming soon',
-                website: 'https://allmersnacks.com',
-                products: ['Food', 'Beverages']
             }
         ];
 
@@ -488,14 +480,6 @@ class GraphVisualization {
                 description: 'The Silver City will open its gates soon',
                 products: ['Coming soon'],
                 website: 'https://lunyra.com'
-            },
-            {
-                id: 'metropole',
-                name: 'Metropole',
-                color: '#b0b0b0',
-                description: 'Taste Art Deco',
-                products: ['Coming soon'],
-                website: 'https://simonallmer.com/metropole'
             },
             {
                 id: 'scaretales',
@@ -610,14 +594,6 @@ class GraphVisualization {
                     { name: 'J005 Cosmographia', link: 'https://simonallmer.com/cosmographia' },
                     { name: 'J006 American Chronicle', link: 'https://simonallmer.com/americanchronicle' }
                 ]
-            },
-            'Allmer Snacks': {
-                color: '#ec4899',
-                items: [
-                    { name: 'S001 Solar-Soda', link: 'https://simonallmer.com/solarsoda' },
-                    { name: 'S002 Metropole', link: 'https://simonallmer.com/metropole' },
-                    { name: 'S003 Hot Ice [TBA]' }
-                ]
             }
         };
 
@@ -630,7 +606,7 @@ class GraphVisualization {
         // Set canvas size
         this.resize();
 
-        // Define the 6 studios
+        // Define the studios
 
 
         // Calculate positions
@@ -657,8 +633,8 @@ class GraphVisualization {
                 initialY = centerY + Math.sin(triAngle) * triforceRadius + radius * 0.3;
             }
 
-            // Calculate final hexagon positions
-            const finalAngle = (index / 6) * Math.PI * 2 - Math.PI / 2;
+            // Calculate final positions for the current studio count
+            const finalAngle = (index / this.studiosData.length) * Math.PI * 2 - Math.PI / 2;
             const finalX = centerX + Math.cos(finalAngle) * radius;
             const finalY = centerY + Math.sin(finalAngle) * radius;
 
@@ -672,7 +648,7 @@ class GraphVisualization {
             this.nodes.push(node);
         });
 
-        // Create edges - complete graph K6 (every node connected to every other node)
+        // Create edges - every node connected to every other node
         for (let i = 0; i < this.nodes.length; i++) {
             for (let j = i + 1; j < this.nodes.length; j++) {
                 this.edges.push(new Edge(this.nodes[i], this.nodes[j]));
@@ -1014,7 +990,7 @@ class GraphVisualization {
                 initialY = centerY + Math.sin(triAngle) * triforceRadius + radius * 0.3;
             }
 
-            // Set final hexagon positions
+            // Set final positions for the current node count
             const finalAngle = (index / this.nodes.length) * Math.PI * 2 - Math.PI / 2;
             const finalX = centerX + Math.cos(finalAngle) * radius;
             const finalY = centerY + Math.sin(finalAngle) * radius;
