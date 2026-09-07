@@ -25,7 +25,6 @@
     --c-music: #fbbf24;
     --c-games: #10b981;
     --c-journals: #b8763a;
-    --c-snacks: #ec4899;
 
     --serif: 'Didot', 'Bodoni MT', 'Hoefler Text', 'Times New Roman', serif;
     --sans: 'Futura', 'Century Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -832,28 +831,6 @@ body.dev .valve.is-dev .valve-label::after {
     width: clamp(38px, 3.4vw, 48px);
     height: auto;
     display: block;
-}
-
-.dev-toggle {
-    position: fixed;
-    bottom: 1.3rem;
-    right: 1.5rem;
-    z-index: 50;
-    font-family: var(--sans);
-    font-size: 0.6rem;
-    letter-spacing: 0.4em;
-    padding: 0.4rem 0.7rem 0.4rem 0.9rem;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 3px;
-    color: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-body.dev .dev-toggle {
-    color: var(--dev-red);
-    border-color: rgba(255, 47, 67, 0.45);
 }
 
 /* ============================================================

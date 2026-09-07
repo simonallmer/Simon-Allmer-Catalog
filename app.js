@@ -393,6 +393,14 @@ class GraphVisualization {
                 website: 'https://aportrait.org'
             },
             {
+                id: 'beat-race',
+                name: 'Beat Race',
+                color: '#b0b0b0',
+                description: 'Coming soon',
+                products: ['Coming soon'],
+                website: 'https://simonallmer.com/beatrace'
+            },
+            {
                 id: 'believe',
                 name: 'Believe',
                 color: '#b0b0b0',
@@ -438,6 +446,14 @@ class GraphVisualization {
                 description: 'The universal lexicon',
                 products: ['Coming soon'],
                 website: 'https://simonallmer.com/cosmographia'
+            },
+            {
+                id: 'crosslink',
+                name: 'Crosslink',
+                color: '#b0b0b0',
+                description: 'Coming soon',
+                products: ['Coming soon'],
+                website: 'https://simonallmer.com/crosslink'
             },
             {
                 id: 'detective-noname',

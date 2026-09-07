@@ -13,7 +13,7 @@
      L3+        → nature, fate, the hour — but only while the games
                   still standing disagree. The moment one is left,
                   the Oracle speaks.
-   Comics, Films, Music and Snacks are "coming soon" leaves.
+    Comics, Films and Music are "coming soon" leaves.
 
    Navigation is an ELEVATOR: each answer is a floor. You ride
    up/down through the floors you've visited (buttons, ↑/↓ keys),
@@ -33,7 +33,6 @@ const FILMS_COLOR = '#3b82f6';
 const MUSIC_COLOR = '#fbbf24';
 const GAMES_COLOR = '#10b981';
 const JOURNALS_COLOR = '#b8763a';
-const SNACKS_COLOR = '#ec4899';
 
 const ORACLE = {
     start: 'medium',
@@ -44,11 +43,11 @@ const ORACLE = {
             color: '#c8a96a',
             eyebrow: 'The Oracle',
             prompt: 'Through which <em>medium</em> shall the Oracle speak?',
-            sub: 'Six studios. Choose the one whose craft you desire.',
-            choices: ['comics', 'films', 'music', 'games', 'journals', 'snacks'],
+            sub: 'Five studios. Choose the one whose craft you desire.',
+            choices: ['comics', 'films', 'music', 'games', 'journals'],
         },
 
-        // ---- The six studios ----
+        // ---- The five studios ----
         comics: {
             label: 'Comics',
             color: COMICS_COLOR,
@@ -171,17 +170,6 @@ const ORACLE = {
             prompt: 'What draws your <em>interest</em>?',
             sub: 'Choose the subject and the Oracle will hand you the volume.',
             question: 'topic',
-        },
-        snacks: {
-            label: 'Snacks',
-            color: SNACKS_COLOR,
-            hint: 'Taste as craft',
-            verdict: {
-                title: 'Metropole',
-                body: 'One snack stands on the shelf today. Taste Art Deco.',
-                note: 'Simon is making the next ones.',
-                links: [['Taste it', 'https://simonallmer.com/metropole']],
-            },
         },
     },
 };
@@ -603,9 +591,6 @@ class Oracle {
 
         this.elUp.addEventListener('click', () => this.up());
         this.elDown.addEventListener('click', () => this.down());
-        document.getElementById('devToggle').addEventListener('click', () =>
-            document.body.classList.toggle('dev')
-        );
         window.addEventListener('keydown', e => this.onKey(e));
 
         this.reset();
