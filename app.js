@@ -552,10 +552,11 @@ class GraphVisualization {
             'Allmer Films': {
                 color: '#3b82f6',
                 items: [
-                    { name: 'F001 Kissinger [TBA]' },
-                    { name: 'F002 Carter [TBA]' },
-                    { name: 'F003 Greenspan [TBA]' },
-                    { name: 'F004 Futory: Dragon Kingdom [TBA]' }
+                    { name: 'F001 Scaretales [TBA]' },
+                    { name: 'F002 Kissinger [TBA]' },
+                    { name: 'F003 Carter [TBA]' },
+                    { name: 'F004 Greenspan [TBA]' },
+                    { name: 'F005 Futory: Dragon Kingdom [TBA]' }
                 ]
             },
             'Allmer Music': {
