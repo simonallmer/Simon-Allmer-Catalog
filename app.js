@@ -554,7 +554,8 @@ class GraphVisualization {
                 items: [
                     { name: 'F001 Kissinger [TBA]' },
                     { name: 'F002 Carter [TBA]' },
-                    { name: 'F003 Futory: Dragon Kingdom [TBA]' }
+                    { name: 'F003 Greenspan [TBA]' },
+                    { name: 'F004 Futory: Dragon Kingdom [TBA]' }
                 ]
             },
             'Allmer Music': {
