@@ -542,9 +542,11 @@ class GraphVisualization {
             'Allmer Comics': {
                 color: '#ef4444',
                 items: [
-                    { name: 'C001 The Quiet Signal [TBA]' },
-                    { name: 'C002 Carter: The Blood Beneath the Soil [TBA]' },
-                    { name: 'C003 Futory: Dragon Kingdom [TBA]' }
+                    { name: 'C001 Sketches [TBA]' },
+                    { name: 'C002 Kissinger [TBA]' },
+                    { name: 'C003 Carter [TBA]' },
+                    { name: 'C004 Greenspan [TBA]' },
+                    { name: 'C005 Futory [TBA]' }
                 ]
             },
             'Allmer Films': {
