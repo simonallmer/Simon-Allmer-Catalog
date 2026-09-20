@@ -229,6 +229,26 @@ class Edge {
 }
 
 
+const socialIcons = {
+    youtube: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.8V8.2l6.5 3.8-6.5 3.8Z"/></svg>',
+    instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" class="social-icon-fill"/></svg>',
+    threads: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.2 2.5c5.3 0 8.9 3.3 9.1 8.4h-2.4c-.2-3.7-2.4-5.9-6.7-6C8.1 4.8 5.7 7.1 5.7 12c0 4.8 2.2 7 6.3 7 3.1 0 4.9-1.5 4.9-3.8 0-1.7-1.1-2.8-3.2-3.2-.2 3.4-1.7 5.2-4.4 5.2-2.1 0-3.5-1.3-3.5-3.2 0-2.2 1.8-3.7 4.8-3.7 1.1 0 2.1.1 3 .4-.4-2-1.8-3-4-3-1.6 0-2.8.6-3.5 1.8L4 8.3c1.2-1.9 3.1-2.9 5.7-2.9 3.6 0 5.8 1.8 6.3 5.1 3.3.6 5 2.2 5 4.8 0 3.8-2.6 6.2-7.1 6.2-5.5 0-8.8-3.1-8.8-9.4 0-6.2 3.5-9.6 7.1-9.6Zm-.8 13.1c1.1 0 1.8-.7 2-2.1-.6-.2-1.2-.3-1.9-.3-1.5 0-2.3.5-2.3 1.4 0 .6.8 1 2.2 1Z"/></svg>',
+    x: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.2 2H22l-8.3 9.5L23.5 22h-7.7l-6-7.8L3 22H0l7.9-9L.5 2h7.7l5.4 7.1L18.2 2Zm-1.4 18h2.1L7.3 3.9H5.1L16.8 20Z"/></svg>'
+};
+
+function createSocialLinks(username, instagramUsername = username) {
+    return [
+        { label: 'YouTube', url: `https://www.youtube.com/@${username}`, icon: socialIcons.youtube },
+        { label: 'Instagram', url: `https://www.instagram.com/${instagramUsername}`, icon: socialIcons.instagram },
+        { label: 'Threads', url: `https://www.threads.net/@${instagramUsername}`, icon: socialIcons.threads },
+        { label: 'X', url: `https://x.com/${username}`, icon: socialIcons.x }
+    ];
+}
+
+function createInstagramLink(username) {
+    return [{ label: 'Instagram', url: `https://www.instagram.com/${username}`, icon: socialIcons.instagram }];
+}
+
 class DetailsPanel {
     constructor() {
         this.element = document.getElementById('details-panel');
@@ -236,6 +256,7 @@ class DetailsPanel {
         this.desc = document.getElementById('panel-desc'); // Currently placeholder text, will be replaced or hidden
         this.content = document.getElementById('panel-dynamic-content');
         this.link = document.getElementById('panel-link');
+        this.socialLinks = document.getElementById('panel-social-links');
         this.closeBtn = document.getElementById('panel-close');
 
         if (this.closeBtn) {
@@ -253,6 +274,8 @@ class DetailsPanel {
         // Reset link
         this.link.classList.add('hidden');
         this.link.href = '#';
+        this.socialLinks.classList.add('hidden');
+        this.socialLinks.innerHTML = '';
 
         if (mode === 'studios' || mode === 'brands') {
             const products = node.data.products || [];
@@ -293,6 +316,13 @@ class DetailsPanel {
 
                 this.link.href = websiteUrl;
                 this.link.classList.remove('hidden');
+            }
+
+            if (node.data.socials) {
+                this.socialLinks.innerHTML = node.data.socials.map(social =>
+                    `<a href="${social.url}" target="_blank" rel="noopener noreferrer" aria-label="${social.label}" title="${social.label}">${social.icon}</a>`
+                ).join('');
+                this.socialLinks.classList.remove('hidden');
             }
             this.content.innerHTML = html;
         }
@@ -341,40 +371,45 @@ class GraphVisualization {
                 id: 'comics',
                 name: 'Allmer Comics',
                 color: '#ef4444',
-                description: 'Description coming soon',
+                description: 'Stories that become legends.',
                 website: 'https://allmercomics.com',
+                socials: createSocialLinks('allmercomics'),
                 products: ['Comic Books', 'Digital Comics']
             },
             {
                 id: 'films',
                 name: 'Allmer Films',
                 color: '#3b82f6',
-                description: 'Description coming soon',
+                description: 'Pure cinema.',
                 website: 'https://allmerfilms.com',
+                socials: createSocialLinks('allmerfilms'),
                 products: ['Feature Films', 'Limited Series']
             },
             {
                 id: 'music',
                 name: 'Allmer Music',
                 color: '#fbbf24',
-                description: 'Description coming soon',
+                description: 'Making records.',
                 website: 'https://allmermusic.com',
+                socials: createSocialLinks('allmermusic'),
                 products: ['Studio Albums', 'Score Albums', 'Musical Instruments']
             },
             {
                 id: 'games',
                 name: 'Allmer Games',
                 color: '#10b981',
-                description: 'Description coming soon',
+                description: 'Playable magic.',
                 website: 'https://allmergames.com',
+                socials: createSocialLinks('allmergames', 'allmergame'),
                 products: ['Tabletop Games', 'Video Games', 'Toys']
             },
             {
                 id: 'journals',
                 name: 'Allmer Journals',
                 color: '#8b4513',
-                description: 'Description coming soon',
+                description: 'Read the world today.',
                 website: 'https://allmerjournals.com',
+                socials: createSocialLinks('allmerjournals'),
                 products: ['Magazines', 'Books']
             }
         ];
@@ -389,6 +424,7 @@ class GraphVisualization {
                 name: 'American Portrait',
                 color: '#b0b0b0',
                 description: "Painting man's eternal struggle for freedom",
+                socials: createInstagramLink('amerportrait'),
                 products: ['Coming soon'],
                 website: 'https://aportrait.org'
             },
@@ -415,6 +451,7 @@ class GraphVisualization {
                 name: 'Casino Camino',
                 color: '#b0b0b0',
                 description: 'Follow your vices',
+                socials: createInstagramLink('casinocamino'),
                 products: [
                     { name: 'American Playing Cards', link: 'https://simonallmer.com/americanplayingcards', color: '#10b981' }
                 ],
@@ -425,6 +462,7 @@ class GraphVisualization {
                 name: 'Chronicle',
                 color: '#b0b0b0',
                 description: 'The definitive record of human history',
+                socials: createInstagramLink('societyreview'),
                 products: [
                     { name: 'Chronicle: Years of Change', link: 'https://simonallmer.com/chronicle', color: '#d2a679' },
                     { name: 'American Chronicle', link: 'https://simonallmer.com/americanchronicle', color: '#d2a679' }
@@ -480,6 +518,7 @@ class GraphVisualization {
                 name: 'Futory',
                 color: '#b0b0b0',
                 description: 'A universe beyond imagination',
+                socials: createInstagramLink('futorysaga'),
                 products: [
                     { name: 'Futory: Dragon Kingdom', color: '#f87171' },
                     { name: 'Futory: Dragon Kingdom', color: '#3b82f6' },
@@ -494,6 +533,7 @@ class GraphVisualization {
                 name: 'Lunyra',
                 color: '#b0b0b0',
                 description: 'The Silver City will open its gates soon',
+                socials: createInstagramLink('lunyracity'),
                 products: ['Coming soon'],
                 website: 'https://lunyra.com'
             },
@@ -510,6 +550,7 @@ class GraphVisualization {
                 name: 'Seven Wonders',
                 color: '#b0b0b0',
                 description: 'Wonder through the ages',
+                socials: createInstagramLink('sevenwondersgames'),
                 products: [
                     { name: 'Pyramid', link: 'https://simonallmer.com/pyramid', color: '#10b981' },
                     { name: 'Gardens', link: 'https://simonallmer.com/gardens', color: '#10b981' },
