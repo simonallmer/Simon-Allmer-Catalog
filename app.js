@@ -287,7 +287,7 @@ class DetailsPanel {
 
             // Products
             if (products.length > 0) {
-                html += '<div class="detail-section"><h4>Products</h4><ul>';
+                html += `<div class="detail-section"><h4>${node.data.sectionTitle || 'Products'}</h4><ul>`;
                 products.forEach(prod => {
                     const prodColor = (typeof prod === 'object' && prod.color) ? ` style="color:${prod.color}"` : '';
                     if (typeof prod === 'object' && prod.link) {
@@ -307,7 +307,9 @@ class DetailsPanel {
             const websiteUrl = node.data.website;
             if (websiteUrl) {
                 // Determine button text
-                if (websiteUrl.includes('simonallmer.com')) {
+                if (node.data.websiteLabel) {
+                    this.link.textContent = node.data.websiteLabel;
+                } else if (websiteUrl.includes('simonallmer.com')) {
                     this.link.textContent = 'Access';
                 } else {
                     const displayUrl = websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '');
@@ -413,6 +415,24 @@ class GraphVisualization {
                 products: ['Magazines', 'Books']
             }
         ];
+
+        this.entertainmentData = {
+            id: 'simon-allmer-entertainment',
+            name: 'Simon Allmer Entertainment',
+            color: '#ffffff',
+            description: 'Timeless Entertainment since 2020.',
+            website: 'https://simonallmer.com',
+            websiteLabel: 'simonallmer.com',
+            socials: createSocialLinks('simonallmer'),
+            sectionTitle: 'Studios',
+            products: [
+                { name: 'Allmer Comics', color: '#ffffff' },
+                { name: 'Allmer Films', color: '#ffffff' },
+                { name: 'Allmer Music', color: '#ffffff' },
+                { name: 'Allmer Games', color: '#ffffff' },
+                { name: 'Allmer Journals', color: '#ffffff' }
+            ]
+        };
 
         this.citiesData = []; // Removed
 
@@ -756,16 +776,30 @@ class GraphVisualization {
         // Window resize
         window.addEventListener('resize', () => this.resize());
 
-        // Header branding toggle on mobile
+        // Open the Simon Allmer Entertainment details panel from the branding.
         const branding = document.querySelector('.header-branding');
         if (branding) {
-            branding.addEventListener('click', () => {
+            const openEntertainmentPanel = () => {
+                this.popup.show({
+                    name: this.entertainmentData.name,
+                    color: this.entertainmentData.color,
+                    data: this.entertainmentData
+                }, 'studios');
+
                 if (window.innerWidth <= 768) {
                     const header = document.querySelector('.header');
                     const switcher = document.querySelector('.view-switch');
                     
                     if (header) header.classList.toggle('hidden-mobile');
                     if (switcher) switcher.classList.toggle('hidden-mobile');
+                }
+            };
+
+            branding.addEventListener('click', openEntertainmentPanel);
+            branding.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openEntertainmentPanel();
                 }
             });
         }

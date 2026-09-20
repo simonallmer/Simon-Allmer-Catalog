@@ -630,6 +630,10 @@ a {
     /* Accent border */
 }
 
+.header-branding {
+    cursor: pointer;
+}
+
 .popup-header {
     display: flex;
     justify-content: space-between;
